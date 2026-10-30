@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo - Novar Essence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blanco: #ffffff;
+    --negro: #000000;
+    --oro-rosa: #b76e79;
+    --oro-rosa-claro: #e8c4b8;
+    --oro-rosa-suave: #f7ebe7;
+    --gris: #5a5a5a;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--negro); background: var(--blanco); line-height: 1.6; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--oro-rosa); outline-offset: 3px; }
+
+  /* Portada */
+  .portada { background: var(--negro); color: var(--blanco); padding: 28px 6vw 0; }
+  .barra { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 28px; border-bottom: 1px solid #333; }
+  .marca { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; letter-spacing: .04em; color: var(--oro-rosa-claro); }
+  .barra a.contacto { font-size: .9rem; text-decoration: none; border: 1px solid var(--oro-rosa); padding: 8px 18px; border-radius: 999px; transition: background .2s; }
+  .barra a.contacto:hover { background: var(--oro-rosa); }
+  
+  .hero { text-align: center; padding: 10vh 0 5vh; }
+  .hero h1 { 
+    font-family: var(--serif); 
+    font-style: italic;
+    font-weight: 700; 
+    font-size: clamp(3rem, 9vw, 7rem); 
+    line-height: .95; 
+    letter-spacing: .02em;
+    background: linear-gradient(120deg, #f3d5cb 0%, #c9917f 45%, #b76e79 100%); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+    display: inline-block;
+    text-shadow: 0 0 35px rgba(183, 110, 121, 0.35);
+  }
+  
+  .franja { height: 14px; margin: 0 -6vw; background: linear-gradient(90deg, #b76e79, #e8c4b8 50%, #b76e79); }
+
+  /* Controles (Filtros y Buscador) */
+  .controles { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 36px 6vw 8px; }
+  .filtros { display: flex; flex-wrap: wrap; gap: 10px; }
+  .filtros button { font: inherit; font-size: .92rem; background: var(--blanco); color: var(--negro); border: 1px solid var(--negro); padding: 8px 20px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .filtros button:hover { border-color: var(--oro-rosa); color: var(--oro-rosa); }
+  .filtros button[aria-pressed="true"] { background: var(--negro); color: var(--blanco); }
+
+  /* Buscador */
+  .buscador-box { position: relative; min-width: 220px; }
+  .buscador-box input { width: 100%; font: inherit; font-size: .92rem; padding: 8px 18px 8px 38px; border: 1px solid #ccc; border-radius: 999px; outline: none; transition: border-color .2s; background: var(--blanco); }
+  .buscador-box input:focus { border-color: var(--oro-rosa); }
+  .buscador-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; fill: var(--gris); }
+
+  /* Productos */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 40px 28px; padding: 28px 6vw 70px; }
+  .producto { display: flex; flex-direction: column; }
+  
+  .foto { 
+    aspect-ratio: 4 / 5; 
+    background: linear-gradient(145deg, var(--oro-rosa-suave), var(--oro-rosa-claro)); 
+    display: grid; 
+    place-items: center; 
+    overflow: hidden; 
+    position: relative; 
+    cursor: pointer; 
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Efecto de Aura Oro Rosa al pasar el mouse o mantener presionado */
+  .foto:hover, 
+  .foto:active {
+    box-shadow: 0 0 22px 4px rgba(183, 110, 121, 0.65);
+    transform: scale(1.02);
+  }
+
+  .foto img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    transition: transform 0.3s ease;
+  }
+
+  .foto:hover img,
+  .foto:active img {
+    transform: scale(1.03);
+  }
+
+  .foto .inicial { font-family: var(--serif); font-size: 4.5rem; color: var(--oro-rosa); opacity: .55; }
+  
+  .etiqueta { position: absolute; top: 12px; left: 12px; background: var(--negro); color: var(--blanco); font-size: .78rem; padding: 3px 12px; border-radius: 999px; z-index: 2; }
+  .producto h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-top: 14px; line-height: 1.2; }
+  .categoria { font-size: .85rem; color: var(--gris); }
+  .talla { font-size: 0.8rem; color: #888; margin-top: 2px; }
+  .precio { font-weight: 500; color: var(--oro-rosa); font-size: 1.1rem; margin: 6px 0 12px; }
+  .pedir { margin-top: auto; text-align: center; text-decoration: none; background: var(--negro); color: var(--blanco); padding: 11px 16px; font-size: .92rem; transition: background .2s; }
+  .pedir:hover { background: var(--oro-rosa); }
+
+  /* Modal / Visor de Imagen Ampliada */
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+  .modal.activo { display: flex; }
+  .modal-contenido { position: relative; max-width: 90vw; max-height: 90vh; }
+  .modal-contenido img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 4px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); display: block; }
+  .modal-cerrar { position: absolute; top: -40px; right: 0; background: none; border: none; color: var(--blanco); font-size: 2rem; cursor: pointer; }
+
+  /* Pie */
+  footer { background: var(--oro-rosa-suave); padding: 44px 6vw; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; border-top: 4px solid var(--oro-rosa); }
+  footer strong { font-family: var(--serif); font-size: 1.5rem; }
+  footer p { color: var(--gris); font-size: .92rem; }
+
+  @media (max-width: 760px) {
+    .grid { gap: 32px 16px; grid-template-columns: repeat(2, 1fr); }
+    .controles { flex-direction: column; align-items: stretch; }
+    .buscador-box { width: 100%; }
+  }
+  @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="barra">
+    <span class="marca">Novar Essence</span>
+    <a class="contacto" href="https://wa.me/573148478182" target="_blank" rel="noopener">Escríbenos</a>
+  </div>
+  <div class="hero">
+    <h1>CaTáLoGo</h1>
+  </div>
+  <div class="franja"></div>
+</header>
+
+<!-- Controles de navegación: Filtros y Buscador -->
+<div class="controles">
+  <nav class="filtros" id="filtros" aria-label="Filtrar por categoría"></nav>
+  <div class="buscador-box">
+    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input type="text" id="buscador" placeholder="Buscar prenda...">
+  </div>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<!-- Ventana modal para ver la foto ampliada -->
+<div class="modal" id="modalImagen">
+  <div class="modal-contenido">
+    <button class="modal-cerrar" id="cerrarModal">&times;</button>
+    <img id="imgAmpliada" src="" alt="Imagen ampliada">
+  </div>
+</div>
+
+<footer>
+  <div>
+    <strong>Novar Essence</strong>
+    <p>Montería, Colombia</p>
+  </div>
+  <div>
+    <p>WhatsApp: +57 314 847 8182</p>
+    <p>Instagram: @Novar Essence</p>
+  </div>
+</footer>
+
+<script>
+  const WHATSAPP = "573148478182";
+
+  const productos = [
+    { nombre: "Shorts",                    categoria: "Shorts",     tallas: "Talla: 6, 8, 10", precio: "$48.000", imagen: "ropa/short.jpeg",           etiqueta: "" },
+    { nombre: "Mini Falda",                categoria: "Faldas",     tallas: "Talla: XS",       precio: "$50.000", imagen: "ropa/mini falda.jpeg",      etiqueta: "" },
+    { nombre: "Falda",                     categoria: "Faldas",     tallas: "Talla: M",        precio: "$28.000", imagen: "ropa/Falda.jpeg",           etiqueta: "" },
+    { nombre: "Falda Deportiva",           categoria: "Faldas",     tallas: "Talla: S, M",     precio: "$28.000", imagen: "ropa/falda deportiva.jpeg",  etiqueta: "" },
+    { nombre: "Jeans Azul",                categoria: "Jeans",      tallas: "Talla: XL, L",    precio: "$88.000", imagen: "ropa/jeans.jpeg",           etiqueta: "" },
+    { nombre: "Jeans Claro",               categoria: "Jeans",      tallas: "Talla: S, M",     precio: "$87.000", imagen: "ropa/jeans1.jpeg",          etiqueta: "" },
+    { nombre: "Conjunto Blanco",           categoria: "Conjuntos",  tallas: "Talla: M",        precio: "$60.000", imagen: "ropa/Conjunto.jpeg",        etiqueta: "" },
+    { nombre: "Conjunto Rayas",            categoria: "Conjuntos",  tallas: "Talla: S",        precio: "$45.000", imagen: "ropa/conjunto rayas.jpeg",   etiqueta: "" },
+    { nombre: "Conjunto Deportivo Rosado", categoria: "Conjuntos",  tallas: "Talla: M",        precio: "$40.000", imagen: "ropa/Conjunto Deportivo Rosado.jpeg", etiqueta: "" },
+    { nombre: "Corsets Rosa",              categoria: "Corsets",    tallas: "Talla: S",        precio: "$45.000", imagen: "ropa/corsets rose.jpeg",    etiqueta: "" },
+    { nombre: "Licras Deportivas",         categoria: "Licras",     tallas: "Talla: S, M",     precio: "$35.000", imagen: "ropa/licras corte en V.jpeg", etiqueta: "" },
+    { nombre: "Licras",                    categoria: "Licras",     tallas: "Talla: S, M",     precio: "$34.000", imagen: "ropa/licras.jpeg",          etiqueta: "" },
+    { nombre: "Blusa",                     categoria: "Blusas",     tallas: "Talla: S, M",     precio: "$25.000", imagen: "ropa/Blusa.jpeg",           etiqueta: "" },
+    { nombre: "Blusa Azul",                categoria: "Blusas",     tallas: "Talla: S",        precio: "$26.000", imagen: "ropa/Blusa Azul.jpeg",      etiqueta: "" },
+    { nombre: "Blusa Rosada",              categoria: "Blusas",     tallas: "Talla: XS",       precio: "$26.000", imagen: "ropa/Blusa Rosada.jpeg",    etiqueta: "" },
+    { nombre: "Blusa Color Vino",          categoria: "Blusas",     tallas: "Talla: XS, S",    precio: "$45.000", imagen: "ropa/Blusa Color Vino.jpeg", etiqueta: "" },
+    { nombre: "Blusa Globo",               categoria: "Blusas",     tallas: "Talla: S",        precio: "$31.000", imagen: "ropa/Blusa Globo.jpeg",     etiqueta: "" },
+    { nombre: "Blusa Cafe",                categoria: "Blusas",     tallas: "Talla: M, L",     precio: "$36.000", imagen: "ropa/Blusa Cafe.jpeg",      etiqueta: "" },
+    { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra.jpeg", etiqueta: "" },
+    { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra1.jpeg", etiqueta: "" },
+    { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra2.jpeg", etiqueta: "" },
+    { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra3.jpeg", etiqueta: "" },
+    { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra4.jpeg", etiqueta: "" },
+    { nombre: "Body V",                    categoria: "Bodys",      tallas: "Talla: XS, S",    precio: "$27.000", imagen: "ropa/Body V.jpeg",          etiqueta: "" },
+    { nombre: "Body Crot Top",             categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/Body Crot-Top.jpeg",   etiqueta: "" },
+    { nombre: "Body Vino",                 categoria: "Bodys",      tallas: "Talla: XS, S",    precio: "$27.000", imagen: "ropa/Body Color Vino.jpeg", etiqueta: "" },
+    { nombre: "Body Negro",                categoria: "Bodys",      tallas: "Talla: M",        precio: "$30.000", imagen: "ropa/Body Negro.jpeg",      etiqueta: "" },
+    { nombre: "Body Escotado",             categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/Body esco.jpeg",       etiqueta: "" },
+    { nombre: "Body De Cuello",            categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/Body De Cuello.jpeg",  etiqueta: "" },
+    { nombre: "Vestido Blanco",            categoria: "Vestidos",   tallas: "Talla: S, M, L",  precio: "$45.000", imagen: "ropa/Vestido Blanco.jpeg",  etiqueta: "" },
+    { nombre: "Vestido Plateado",          categoria: "Vestidos",   tallas: "Talla: S",        precio: "$35.000", imagen: "ropa/Vestido Plateado.jpeg", etiqueta: "" },
+    { nombre: "Vestido Cafe",              categoria: "Vestidos",   tallas: "Talla: S, M, L",  precio: "$45.000", imagen: "ropa/Vestido Cafe.jpeg",    etiqueta: "" }
+  ];
+
+  const grid = document.getElementById("grid");
+  const filtros = document.getElementById("filtros");
+  const buscador = document.getElementById("buscador");
+  const modalImagen = document.getElementById("modalImagen");
+  const imgAmpliada = document.getElementById("imgAmpliada");
+  const cerrarModal = document.getElementById("cerrarModal");
+
+  const categorias = ["Todos", "Blusas", "Corsets", "Vestidos", "Jeans", "Faldas", "Conjuntos", "Licras", "Bodys"];
+  let categoriaActiva = "Todos";
+  let textoBusqueda = "";
+
+  function pintarFiltros() {
+    filtros.innerHTML = "";
+    categorias.forEach(cat => {
+      const b = document.createElement("button");
+      b.textContent = cat;
+      b.setAttribute("aria-pressed", cat === categoriaActiva);
+      b.addEventListener("click", () => {
+        categoriaActiva = cat;
+        pintarFiltros();
+        pintarProductos();
+      });
+      filtros.appendChild(b);
+    });
+  }
+
+  function pintarProductos() {
+    grid.innerHTML = "";
+    
+    const filtrados = productos.filter(p => {
+      const coincideCat = categoriaActiva === "Todos" || p.categoria.toLowerCase() === categoriaActiva.toLowerCase();
+      const coincideTexto = p.nombre.toLowerCase().includes(textoBusqueda.toLowerCase()) || 
+                            p.categoria.toLowerCase().includes(textoBusqueda.toLowerCase()) ||
+                            p.tallas.toLowerCase().includes(textoBusqueda.toLowerCase());
+      return coincideCat && coincideTexto;
+    });
+
+    if (filtrados.length === 0) {
+      grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gris); padding: 40px 0;">No se encontraron prendas.</p>';
+      return;
+    }
+
+    filtrados.forEach(p => {
+      const textoMensaje = `Hola, me interesa esta prenda:\n\n- Producto: ${p.nombre}\n- Precio: ${p.precio}\n- ${p.tallas}\n- Referencia: ${p.imagen}`;
+      const msg = encodeURIComponent(textoMensaje);
+
+      const art = document.createElement("article");
+      art.className = "producto";
+      
+      const fotoContenido = p.imagen 
+        ? `<img src="${p.imagen}" alt="${p.nombre}">` 
+        : `<span class="inicial">${p.nombre.charAt(0)}</span>`;
+
+      art.innerHTML = `
+        <div class="foto" data-img="${p.imagen || ''}">
+          ${fotoContenido}
+          ${p.etiqueta ? '<span class="etiqueta">' + p.etiqueta + '</span>' : ''}
+        </div>
+        <h3>${p.nombre}</h3>
+        <span class="categoria">${p.categoria}</span>
+        <span class="talla">${p.tallas}</span>
+        <span class="precio">${p.precio}</span>
+        <a class="pedir" href="https://wa.me/${WHATSAPP}?text=${msg}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      `;
+
+      const contenedorFoto = art.querySelector(".foto");
+      contenedorFoto.addEventListener("click", () => {
+        if (p.imagen) {
+          imgAmpliada.src = p.imagen;
+          modalImagen.classList.add("activo");
+        }
+      });
+
+      grid.appendChild(art);
+    });
+  }
+
+  buscador.addEventListener("input", (e) => {
+    textoBusqueda = e.target.value;
+    pintarProductos();
+  });
+
+  cerrarModal.addEventListener("click", () => {
+    modalImagen.classList.remove("activo");
+  });
+  modalImagen.addEventListener("click", (e) => {
+    if (e.target === modalImagen) {
+      modalImagen.classList.remove("activo");
+    }
+  });
+
+  pintarFiltros();
+  pintarProductos();
+</script>
+
+</body>
+</html>
