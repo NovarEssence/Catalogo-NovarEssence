@@ -174,12 +174,13 @@
 
 <script>
   const WHATSAPP = "573148478182";
+  const URL_BASE = "https://novaressence.github.io/Catalogo-NovarEssence/";
 
   const productos = [
     { nombre: "Shorts",                    categoria: "Shorts",     tallas: "Talla: 6, 8, 10", precio: "$48.000", imagen: "ropa/short.jpeg",           etiqueta: "" },
     { nombre: "Mini Falda",                categoria: "Faldas",     tallas: "Talla: XS",       precio: "$50.000", imagen: "ropa/mini falda.jpeg",      etiqueta: "" },
     { nombre: "Falda",                     categoria: "Faldas",     tallas: "Talla: M",        precio: "$28.000", imagen: "ropa/Falda.jpeg",           etiqueta: "" },
-    { nombre: "Falda Deportiva",           categoria: "Faldas",     tallas: "Talla: S, M",     precio: "$28.000", imagen: "ropa/Falda Deportiva.jpeg",  etiqueta: "" },
+    { nombre: "Falda Deportiva",           categoria: "Faldas",     tallas: "Talla: S, M",     precio: "$28.000", imagen: "ropa/falda-deportiva.jpeg",  etiqueta: "" },
     { nombre: "Jeans Azul",                categoria: "Jeans",      tallas: "Talla: XL, L",    precio: "$88.000", imagen: "ropa/jeans.jpeg",           etiqueta: "" },
     { nombre: "Jeans Claro",               categoria: "Jeans",      tallas: "Talla: S, M",     precio: "$87.000", imagen: "ropa/jeans1.jpeg",          etiqueta: "" },
     { nombre: "Conjunto Blanco",           categoria: "Conjuntos",  tallas: "Talla: M",        precio: "$60.000", imagen: "ropa/Conjunto.jpeg",        etiqueta: "" },
@@ -192,7 +193,7 @@
     { nombre: "Blusa Azul",                categoria: "Blusas",     tallas: "Talla: S",        precio: "$26.000", imagen: "ropa/Blusa Azul.jpeg",      etiqueta: "" },
     { nombre: "Blusa Rosada",              categoria: "Blusas",     tallas: "Talla: XS",       precio: "$26.000", imagen: "ropa/Blusa Rosada.jpeg",    etiqueta: "" },
     { nombre: "Blusa Color Vino",          categoria: "Blusas",     tallas: "Talla: XS, S",    precio: "$45.000", imagen: "ropa/Blusa Color Vino.jpeg", etiqueta: "" },
-    { nombre: "Blusa Globo",               categoria: "Blusas",     tallas: "Talla: S",        precio: "$31.000", imagen: "ropa/Blusa Globo.jpeg",     etiqueta: "" },
+    { nombre: "Blusa Globo",               categoria: "Blusas",     tallas: "Talla: S",        precio: "$31.000", imagen: "ropa/Blusa Globo.jpeg",      etiqueta: "" },
     { nombre: "Blusa Cafe",                categoria: "Blusas",     tallas: "Talla: M, L",     precio: "$36.000", imagen: "ropa/Blusa Cafe.jpeg",      etiqueta: "" },
     { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra.jpeg", etiqueta: "" },
     { nombre: "Bodys Poli-Licra",          categoria: "Bodys",      tallas: "Talla: S, M, L",  precio: "$30.000", imagen: "ropa/Bodys poli-licra1.jpeg", etiqueta: "" },
@@ -203,7 +204,7 @@
     { nombre: "Body Crot Top",             categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/Body Crot-Top.jpeg",   etiqueta: "" },
     { nombre: "Body Vino",                 categoria: "Bodys",      tallas: "Talla: XS, S",    precio: "$27.000", imagen: "ropa/Body Color Vino.jpeg", etiqueta: "" },
     { nombre: "Body Negro",                categoria: "Bodys",      tallas: "Talla: M",        precio: "$30.000", imagen: "ropa/Body Negro.jpeg",      etiqueta: "" },
-    { nombre: "Body Escotado",             categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/body esco.jpeg",       etiqueta: "" },
+    { nombre: "Body Escotado",             categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/body-esco.jpeg",        etiqueta: "" },
     { nombre: "Body De Cuello",            categoria: "Bodys",      tallas: "Talla: S",        precio: "$28.000", imagen: "ropa/Body De Cuello.jpeg",  etiqueta: "" },
     { nombre: "Vestido Blanco",            categoria: "Vestidos",   tallas: "Talla: S, M, L",  precio: "$45.000", imagen: "ropa/Vestido Blanco.jpeg",  etiqueta: "" },
     { nombre: "Vestido Plateado",          categoria: "Vestidos",   tallas: "Talla: S",        precio: "$35.000", imagen: "ropa/Vestido Plateado.jpeg", etiqueta: "" },
@@ -253,7 +254,7 @@
     }
 
     filtrados.forEach(p => {
-      const textoMensaje = `Hola, me interesa esta prenda:\n\n- Producto: ${p.nombre}\n- Precio: ${p.precio}\n- ${p.tallas}\n- Referencia: ${p.imagen}`;
+      const textoMensaje = `Hola, me interesa esta prenda:\n\n- Producto: ${p.nombre}\n- Precio: ${p.precio}\n- ${p.tallas}\n- Referencia: ${URL_BASE}${p.imagen}`;
       const msg = encodeURIComponent(textoMensaje);
 
       const art = document.createElement("article");
@@ -304,6 +305,8 @@
   pintarFiltros();
   pintarProductos();
 </script>
+</body>
+</html>
 
 </body>
 </html>
